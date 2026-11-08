@@ -1,0 +1,22 @@
+# Reference material (not mine to publish)
+docs/REFERENCE-NOTES.md
+# Agent tooling and third-party skills
+.agent/
+.gemini/
+# Deploy copy, scratch and tooling output
+*-deploy/
+scratch/
+*.log
+*.tmp
+node_modules/
+# Source photos before optimisation, if large
+assets/img/hero/*-source.*
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Secrets
+.env
+.env.*
+

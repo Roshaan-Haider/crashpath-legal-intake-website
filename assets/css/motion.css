@@ -1,0 +1,312 @@
+/* =============================================================
+   motion.css - CrashPath animations and transitions
+   Requires tokens.css.
+   ============================================================= */
+
+/* ----------------------------------------------------------
+   Respect prefers-reduced-motion: reduce all motion
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-pipeline-node,
+  .pipeline-line,
+  .hero-branch-stem,
+  .hero-branch-bar,
+  .hero-branch-drop,
+  .hero-pillar,
+  .hero-pillar__icon,
+  .hero-pillar__title,
+  .hero-pillar__text,
+  .hero-stats,
+  .hero-actions--centered {
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Show all pipeline nodes as lit immediately */
+  .pipeline-node circle {
+    fill: var(--accent) !important;
+  }
+
+  .pipeline-node .node-icon {
+    color: var(--btn-ink) !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   Scroll reveal
+   (Base opacity/transform live in components.css: here we
+    add the delay utility classes and affirm the transition)
+   ---------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+
+/* ----------------------------------------------------------
+   Pipeline SVG animation keyframes
+   ---------------------------------------------------------- */
+
+/* Node pulse ring */
+@keyframes pulse-node {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  50%  { transform: scale(1.15); opacity: 0.2; }
+  100% { transform: scale(1);    opacity: 0.6; }
+}
+
+/* Line draw: stroke-dashoffset from full length to 0 */
+@keyframes flow-line {
+  from { stroke-dashoffset: var(--line-length, 200); }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Node glow when active */
+@keyframes node-glow {
+  0%   { box-shadow: 0 0 0   0px rgba(76, 141, 255, 0); }
+  50%  { box-shadow: 0 0 0   8px rgba(76, 141, 255, 0.3); }
+  100% { box-shadow: 0 0 0   4px rgba(76, 141, 255, 0.15); }
+}
+
+/* ----------------------------------------------------------
+   Pipeline node classes (applied by hero-animation.js)
+   ---------------------------------------------------------- */
+
+.pipeline-node-circle {
+  transition:
+    fill var(--dur-mid) var(--ease-out),
+    stroke var(--dur-mid) var(--ease-out);
+}
+
+.pipeline-node-wrap {
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+
+.pipeline-node-wrap.active .pipeline-pulse-ring {
+  animation: pulse-node 2s var(--ease-out) infinite;
+  transform-origin: center;
+}
+
+.pipeline-node-wrap.active .pipeline-node-circle {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+/* ----------------------------------------------------------
+   Nav link hover underline (slide-in from left)
+   Defined in components.css as ::after pseudo but
+   we declare the keyframe here for consistency.
+   ---------------------------------------------------------- */
+@keyframes nav-underline-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ----------------------------------------------------------
+   Button transitions
+   ---------------------------------------------------------- */
+.btn,
+.btn-nav {
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   Float button hover transform
+   ---------------------------------------------------------- */
+.float-btn {
+  transition:
+    transform var(--dur-fast) var(--ease-spring),
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   Logo mark path: subtle draw on page load
+   ---------------------------------------------------------- */
+@keyframes logo-draw {
+  from {
+    stroke-dashoffset: 100;
+    opacity: 0.4;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.logo-mark path,
+.logo-mark polyline {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  animation: logo-draw 0.8s var(--ease-out) both;
+}
+
+.logo-mark polyline {
+  animation-delay: 0.3s;
+}
+
+/* Skip logo animation for mobile / reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark path,
+  .logo-mark polyline {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ----------------------------------------------------------
+   Scroll progress bar
+   Width is set via transform: scaleX() by layout.js.
+   This just ensures the transition is smooth.
+   ---------------------------------------------------------- */
+#scroll-progress {
+  transition: transform 80ms linear;
+}
+
+/* ----------------------------------------------------------
+   Service card hover
+   ---------------------------------------------------------- */
+.service-card {
+  transition:
+    border-color var(--dur-mid) var(--ease-out),
+    box-shadow var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   Back to top show/hide
+   ---------------------------------------------------------- */
+.back-to-top {
+  transition:
+    opacity var(--dur-mid) var(--ease-out),
+    transform var(--dur-mid) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   Mobile menu slide
+   ---------------------------------------------------------- */
+.nav-mobile-menu {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.nav-mobile-overlay {
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+/* ----------------------------------------------------------
+   Centered Hero Branching & Pillar Sequence (Timeline RAF)
+   ---------------------------------------------------------- */
+
+/* While hero is in RAF intro animation, disable CSS transitions to prevent frame fighting */
+.hero-animating .hero-pillar,
+.hero-animating .hero-pillar .hero-pillar__icon,
+.hero-animating .hero-pillar .hero-pillar__title,
+.hero-animating .hero-pillar .hero-pillar__text,
+.hero-animating .hero-stats,
+.hero-animating .hero-actions--centered,
+.hero-animating .hero-branch-stem,
+.hero-animating .hero-branch-bar,
+.hero-animating .hero-branch-drop {
+  transition: none !important;
+}
+
+/* Base pillar styles (visible by default) */
+.hero-pillar {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color var(--dur-mid) var(--ease-out);
+}
+
+.hero-pillar .hero-pillar__icon {
+  transform: scale(1);
+  opacity: 1;
+  transition:
+    transform 340ms var(--ease-spring),
+    opacity 280ms var(--ease-out);
+}
+
+.hero-pillar .hero-pillar__title,
+.hero-pillar .hero-pillar__text {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.hero-stats {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+.hero-actions--centered {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+/* Active states during sequence */
+.hero-animating .hero-pillar.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-animating .hero-pillar.is-visible .hero-pillar__icon {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.hero-animating .hero-pillar.is-visible .hero-pillar__title,
+.hero-animating .hero-pillar.is-visible .hero-pillar__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-animating .hero-stats.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-animating .hero-actions--centered.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

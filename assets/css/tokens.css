@@ -1,0 +1,155 @@
+/* =============================================================
+   tokens.css - CrashPath design tokens
+   All CSS custom properties live here. Import first.
+   ============================================================= */
+
+:root {
+
+  /* ----------------------------------------------------------
+     Palette - Neutral Graphite Dark Theme
+     ---------------------------------------------------------- */
+  --ink: #ECEEF1;              /* Primary text on dark surfaces (16.7:1 AA/AAA) */
+  --ink-muted: #9AA3AF;        /* Secondary/muted text (7.6:1 AA) */
+  --ink-xmuted: #818B9C;       /* Tertiary text & placeholder (5.3:1 AA) */
+  --ground: #0B0D10;           /* Base page background (neutral graphite-black, no navy) */
+  --surface: #12151A;          /* Primary surface step */
+  --surface-alt: #1A1E25;      /* Secondary surface step */
+  --border: #262B34;           /* Subtle hairline borders */
+  --border-focus: #4C8DFF;     /* Focused input/control border */
+  --border-azure: rgba(76, 141, 255, 0.16); /* Subtle azure hairline between sections */
+  --accent: #4C8DFF;           /* Primary accent azure blue (6.1:1 on bg) */
+  --accent-dark: #3B72D4;      /* Pressed/active blue */
+  --accent-light: #6BA1FF;     /* Hover state blue */
+  --accent-lighter: #8DB6FF;   /* Lighter azure for highlights & numbers (8.6:1 AA) */
+  --accent-deep: #1A2E4E;      /* Deeper blue for node fills & tile backgrounds */
+  --surface-blue: #101722;     /* Blue-tinted primary surface step */
+  --surface-blue-alt: #151D2B; /* Blue-tinted secondary surface step */
+  --btn-ink: #0B0D10;          /* Dark ink text on blue/coral buttons (6.1:1 AA) */
+  --accent-call: #FF7A66;      /* Secondary accent soft coral (phone/call & urgent only) */
+  --accent-call-hover: #FF9482;/* Coral hover state */
+  --error: #F87171;            /* Input error text & border (6.6:1 AA) */
+  --success: #34D399;          /* Success feedback (9.5:1 AA) */
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* ----------------------------------------------------------
+     Typography - Single Family: Plus Jakarta Sans
+     ---------------------------------------------------------- */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
+
+  /* Unified Type Scale Tokens */
+  --type-display-size: clamp(2.5rem, 4.5vw, 3.75rem); /* 40px - 60px */
+  --type-display-weight: 700;
+  --type-display-lead: 1.1;
+  --type-display-track: -0.025em;
+
+  --type-h1-size: clamp(2rem, 3.5vw, 2.75rem); /* 32px - 44px */
+  --type-h1-weight: 700;
+  --type-h1-lead: 1.15;
+  --type-h1-track: -0.02em;
+
+  --type-h2-size: clamp(1.5rem, 2.5vw, 2rem); /* 24px - 32px */
+  --type-h2-weight: 600;
+  --type-h2-lead: 1.25;
+  --type-h2-track: -0.015em;
+
+  --type-h3-size: clamp(1.125rem, 1.8vw, 1.375rem); /* 18px - 22px */
+  --type-h3-weight: 600;
+  --type-h3-lead: 1.35;
+  --type-h3-track: -0.01em;
+
+  --type-body-size: 1rem; /* 16px */
+  --type-body-weight: 400;
+  --type-body-lead: 1.6;
+  --type-body-track: 0;
+
+  --type-small-size: 0.875rem; /* 14px */
+  --type-small-weight: 400;
+  --type-small-lead: 1.5;
+  --type-small-track: 0;
+
+  --type-caption-size: 0.75rem; /* 12px */
+  --type-caption-weight: 600;
+  --type-caption-lead: 1.4;
+  --type-caption-track: 0.06em;
+
+  /* Scale */
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  2rem;       /* 32px */
+  --text-4xl:  2.75rem;    /* 44px */
+  --text-5xl:  3.75rem;    /* 60px */
+  --text-6xl:  5rem;       /* 80px */
+
+  /* Line height */
+  --lead-tight:   1.0;
+  --lead-snug:    1.2;
+  --lead-normal:  1.5;
+  --lead-relaxed: 1.65;
+
+  /* Letter spacing */
+  --track-tight:  -0.03em;
+  --track-normal:  0em;
+  --track-wide:    0.04em;
+
+  /* ----------------------------------------------------------
+     Space & Section Sizing System (No Dead Gaps)
+     ---------------------------------------------------------- */
+  --sp-1:  0.25rem;   /*  4px */
+  --sp-2:  0.5rem;    /*  8px */
+  --sp-3:  0.75rem;   /* 12px */
+  --sp-4:  1rem;      /* 16px */
+  --sp-6:  1.5rem;    /* 24px */
+  --sp-8:  2rem;      /* 32px */
+  --sp-10: 2.5rem;    /* 40px */
+  --sp-12: 3rem;      /* 48px */
+  --sp-16: 4rem;      /* 64px */
+  --sp-20: 5rem;      /* 80px */
+  --sp-24: 6rem;      /* 96px */
+  --sp-32: 8rem;      /* 128px */
+  --sp-40: 10rem;     /* 160px */
+
+  --section-padding-y: clamp(3.5rem, 5vw, 5rem);
+  --section-gap: var(--section-padding-y);
+  --hero-padding-top: clamp(3.5rem, 6vw, 5rem);
+  --hero-padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+
+  /* ----------------------------------------------------------
+     Layout
+     ---------------------------------------------------------- */
+  --container:        72rem;   /* 1152px */
+  --container-narrow: 48rem;   /* 768px */
+  --nav-h:            4rem;    /* 64px */
+  --announce-h:       2.5rem;  /* 40px */
+  --radius:           2px;
+  --radius-btn:       2px;
+
+  /* ----------------------------------------------------------
+     Motion
+     ---------------------------------------------------------- */
+  --dur-fast:   160ms;
+  --dur-mid:    280ms;
+  --dur-slow:   480ms;
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ----------------------------------------------------------
+     Z-index
+     ---------------------------------------------------------- */
+  --z-below:  -1;
+  --z-base:    0;
+  --z-float:  10;
+  --z-nav:   100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
